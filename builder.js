@@ -10,12 +10,6 @@
 											});
 		});
 	});
-//chrome.runtime.sendMessage({gretting:"aaa"}, function(res){console.log(res);});
-	//chrome.tabs.executeScript(null, {file: 'content.js'});
-	//chrome.runtime.onMessage.addListener(function(message) {
-	//	d(message);
-	//});
-	//chrome.tabs.executeScript(null, {file: 'content.js'});
 }
 
 function pick(){
@@ -32,13 +26,11 @@ chrome.tabs.getSelected(null, function(tab){
 	  if (chrome.extension.lastError) {
 		console.log("Got expected error: " + chrome.extension.lastError.message);
 	  }
+		chrome.contextMenus.onClicked.addListener(function() {
+			pick();
+			if (chrome.extension.lastError) {
+			console.log("Got expected error: " + chrome.extension.lastError.message);
+			}
+		});
 	});
-	chrome.contextMenus.onClicked.addListener(function() {
-		pick();
-		if (chrome.extension.lastError) {
-		console.log("Got expected error: " + chrome.extension.lastError.message);
-		}
-	});	
 });
-
-
