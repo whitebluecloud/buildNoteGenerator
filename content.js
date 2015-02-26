@@ -56,7 +56,12 @@
 	   }
 	   ,getDueDate : function(d) {
 			this.dueDate = this.getTarget(d, "<th class=\"due-date", "담당자", "<td class=\"due-date\">", "</td>");
-			console.log("시작시간 : " + this.dueDate);
+			// 완료일자가 없는 경우 작성일자로 세팅
+			if(this.dueDate == null || this.dueDate == "" || this.dueDate == "undefined") {
+				var today = new Date();
+				this.dueDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+			}
+			console.log("완료시간 : " + this.dueDate);
 	   }
 	   ,getTarget : function(d, s1, e1, s2, e2) {
 			var e = d.substring(d.indexOf(s1),d.indexOf(e1));

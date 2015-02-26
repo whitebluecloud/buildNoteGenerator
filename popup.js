@@ -153,3 +153,10 @@ document.getElementById('init').onclick = function(e){
 		s[i].checked = false;
 	}
 };
+
+document.getElementById('githubLink').onclick = function(e){
+	chrome.tabs.getSelected(null, function(tab) {
+		var redmineWriteURL = "https://github.com/whitebluecloud/buildNoteGenerator";
+		chrome.tabs.create({ url: redmineWriteURL })
+	});
+}
