@@ -31,14 +31,11 @@
 		}
 	   ,getSubject : function(d) {
 			this.subject = this.getTarget(d, "subject", "author", "<h3>", "</h3>");
-			//var e = d.substring(d.indexOf("subject"), d.indexOf("author"));
-			//this.subject = e.substring(e.indexOf("<h3>") + 4, e.indexOf("</h3>"));
-			// 명품화장품 신디케이션 페이지에서 풍선팝업 닫기 오류
 			console.log("제목 : " + this.subject);
 	   }
 	   ,getRequester : function(d) {
-			e = this.getTarget(d, "author", "이(가)", "active\">", "</a>"); // 박혜민(130088) 주임
-			this.requester = e.substring(0,e.indexOf("(")) + e.substring(e.indexOf(" "), e.length); // 박혜민 주임
+			e = this.getTarget(d, "author", "이(가)", "active\">", "</a>"); 
+			this.requester = e.substring(0,e.indexOf("(")) + e.substring(e.indexOf(" "), e.length);
 			console.log("요청자 : " + this.requester);
 	   }
 	   ,getDeveloper : function(d) {

@@ -9,7 +9,7 @@ window.addEventListener('load', function(evt) {
 		};
 	});
 	
-	// 로컬스토리지 테스트
+	// 로컬스토리지
 	var ls = localStorage;
 	
 	// 레드마인번호
@@ -35,15 +35,20 @@ window.addEventListener('load', function(evt) {
 		}
 	}
 	
+	// 기획자
 	var pr = ls.getItem("pmRequest");
 	if(pr != null) {
 		document.getElementById("pmRequest").value = pr;
 	}
 	
+	// 소스파일경로
 	var ss = ls.getItem("sourceSrc");
 	if(ss != null) {
 		document.getElementById("sourceSrc").value = ss;
 	}
+	
+	//
+	
 });
 
 function onPageDetailsReceived()  { 
@@ -139,7 +144,7 @@ window.addEventListener("unload", function (event) {
 		ls.setItem("sourceSrc",sourceSrc);
 	}	
 	
-}, true);
+});
 
 document.getElementById('init').onclick = function(e){
 	localStorage.clear();

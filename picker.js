@@ -38,6 +38,7 @@
 	  , "ssg-mapi-webapp":"mAPI" 
 	  , "ssg-bo-webapp":"BO" 
 	  , "ssg-po-webapp":"PO" 
+	  , "ssg-batch-app":"batch"
   }
   , getInfo : function() {
 	  var that = this;
