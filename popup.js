@@ -69,6 +69,13 @@ document.getElementById('confirmBtn').addEventListener('click', function(evt){
 
 function createDescription() {
 	chrome.runtime.getBackgroundPage(function(eventPage) {
+		var redmineNo = document.getElementById('redmine_no').value;
+		console.log(redmineNo);
+		if(redmineNo == null || redmineNo == 'undefined' || redmineNo == ''){
+			alert("레드마인 번호를 입력해주세요.");
+			return;
+		}
+		
 		var releaseSystem = getReleaseSystem();
 		var pmRequest = getTextArea("pmRequest");
 		var sourceSrc = getTextArea("sourceSrc");
