@@ -22,6 +22,7 @@
   , hasSsgLib : false
   , hasEmallLib : false
   , hasBoLib : false
+  , hasPayLib : false
   
   , releaseSystemMatchingMap : {
 		"ssg-ssgmall-webapp":"SSG"
@@ -35,10 +36,29 @@
 	  , "ssg-boons-webapp":"분스"
 	  , "ssg-memall-webapp":"m이마트몰"
 	  , "ssg-mtraders-webapp":"m트레이더스"      
-	  , "ssg-mapi-webapp":"mAPI" 
+	  
 	  , "ssg-bo-webapp":"BO" 
 	  , "ssg-po-webapp":"PO" 
+	  
 	  , "ssg-batch-app":"batch"
+	  
+	  , "ssg-event-webapp":"이벤트"
+	  
+	  , "ssg-eapi-webapp":"eAPI"
+	  , "ssg-uapi-webapp":"uAPI"
+	  , "ssg-capi-webapp":"cAPI"
+	  , "ssg-mapi-webapp":"mAPI" 
+	  
+	  , "ssg-pay-webapp":"pay"
+	  , "ssg-mpay-webapp":"mpay"
+	  
+	  , "ssg-pco-webapp":"PCO"
+	  , "ssg-pdo-webapp":"PDO"	  
+	  , "ssg-ecms-webapp":"ECMS"	  
+	  , "pg-api-webapp":"PG_API"
+	  , "pg-www-webapp":"PG_프론트"	  
+	  , "pg-bo-webapp":"PG_BO"	  	  
+	  
   }
   , getInfo : function() {
 	  var that = this;
@@ -81,6 +101,7 @@
 			if(v == "ssg-ssgmall-library") that.hasSsgLib = true;
 			if(v == "ssg-emall-library") that.hasEmallLib = true;
 			if(v == "ssg-bo-library") that.hasBoLib = true;
+			if(v == "ssg-pay-library") that.hasPayLib = true;
 		});
 	}
   , parse : function() {
@@ -213,7 +234,17 @@
 			  console.log("변경된 작업시스템 : " + v.value);
 			}
 		  });
-		} 
+		}
+		
+		if(that.hasPayLib) {
+		  //pay, mpay
+		  $.each(that.releaseSystemOptions, function(i, v) {
+			if(v.value == "pay" || v.value == "mpay") {
+			  v.selected = true;
+			  console.log("변경된 작업시스템 : " + v.value);
+			}
+		  });
+		}		
 		
 		// webapp단위
 		$.each(that.targetSystem, function(i, v) {
