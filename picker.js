@@ -16,7 +16,8 @@
   , taskWatcherCheckBoxes : $('#watchers_inputs label') // task지킴이
   , releaseSystemOptions : $('#issue_custom_field_values_37 > option') // 배포시스템
   , releaseDateInput : $('#issue_custom_field_values_38') // 배포일자
-  , releaseType : $('#issue_tracker_id')
+  , releaseType : $('#issue_tracker_id'), staffSelector: $('#issue_assigned_to_id') // 담당자
+    , staffNo: ""
   
   , hasResourceFront : false
   , hasSsgLib : false
@@ -103,6 +104,12 @@
 			if(v == "ssg-bo-library") that.hasBoLib = true;
 			if(v == "ssg-pay-library") that.hasPayLib = true;
 		});
+
+        chrome.runtime.sendMessage({method: "getLocalStorage", key: "staffNo"}, function (response) {
+            if (response) {
+                this.staffNo = response.data;
+            }
+        });
 	}
   , parse : function() {
 		console.log("=============== parsing start ==================");
@@ -111,6 +118,7 @@
 		this.selectReleaseDate();
 		this.selectReleaseSystem();
 		this.selectTaskWatcher();
+        this.selectStaffNo();
 		console.log("=============== parsing end ==================");
   }
   
@@ -261,7 +269,18 @@
 			}
 		  });
 		});
-  }       
+    }, selectStaffNo: function () {
+        if (this.staffNo) {
+            var that = this;
+            $.each(that.staffSelector.children('option'), function (i, v) {
+                v.selected = false;
+                if (v.value == that.staffNo) {
+                    console.log("선택된 담당자 : " + v.value);
+                    v.selected = true;
+                }
+            });
+        }
+    }
 };
 redminePicker.init();
 redminePicker.parse();

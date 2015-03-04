@@ -154,8 +154,10 @@ window.addEventListener("unload", function (event) {
 });
 
 document.getElementById('init').onclick = function(e){
+    var staffNo = localStorage.getItem("staffNo");
 	localStorage.clear();
-	
+    localStorage.setItem("staffNo", staffNo);
+
 	document.getElementById('redmine_no').value = "";
 	document.getElementById('pmRequest').value = "";
 	document.getElementById('sourceSrc').value = "";
