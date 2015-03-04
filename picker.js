@@ -120,9 +120,8 @@
                 that.staffNo = response.status;
 				that.selectStaffNo();
             }
+			console.log("=============== parsing end ==================");
         });
-		
-		console.log("=============== parsing end ==================");
   }
   
   , getName : function(str, token) {
@@ -279,7 +278,7 @@
             $.each(that.staffSelector.children('option'), function (i, v) {
                 v.selected = false;
                 if (v.value == that.staffNo) {
-                    console.log("선택된 담당자 : " + v.value);
+                    console.log("선택된 담당자 : " + v.text);
                     v.selected = true;
                 }
             });
