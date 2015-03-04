@@ -17,7 +17,7 @@
   , releaseSystemOptions : $('#issue_custom_field_values_37 > option') // 배포시스템
   , releaseDateInput : $('#issue_custom_field_values_38') // 배포일자
   , releaseType : $('#issue_tracker_id'), staffSelector: $('#issue_assigned_to_id') // 담당자
-    , staffNo: ""
+  , staffNo: ""
   
   , hasResourceFront : false
   , hasSsgLib : false
@@ -105,20 +105,23 @@
 			if(v == "ssg-pay-library") that.hasPayLib = true;
 		});
 
-        chrome.runtime.sendMessage({method: "getLocalStorage", key: "staffNo"}, function (response) {
-            if (response) {
-                this.staffNo = response.data;
-            }
-        });
 	}
   , parse : function() {
+		var that = this;
 		console.log("=============== parsing start ==================");
 		this.selectPm();
 		this.selectTargetSystem();  
 		this.selectReleaseDate();
 		this.selectReleaseSystem();
 		this.selectTaskWatcher();
-        this.selectStaffNo();
+
+        chrome.runtime.sendMessage({method: "getLocalStorage", key: "staffNo"}, function (response) {
+            if (response) {
+                that.staffNo = response.status;
+				that.selectStaffNo();
+            }
+        });
+		
 		console.log("=============== parsing end ==================");
   }
   
@@ -269,7 +272,8 @@
 			}
 		  });
 		});
-    }, selectStaffNo: function () {
+    }
+	, selectStaffNo: function () {
         if (this.staffNo) {
             var that = this;
             $.each(that.staffSelector.children('option'), function (i, v) {
