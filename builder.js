@@ -20,6 +20,6 @@ chrome.contextMenus.create({"title": "buildNoteSelector", "onclick": function ()
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.method == "getLocalStorage") {
-        sendResponse({status: localStorage[request.key]});
+        sendResponse({data: localStorage[request.key]});
     }
 });
