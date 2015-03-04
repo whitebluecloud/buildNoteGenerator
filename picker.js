@@ -53,12 +53,13 @@
 	  , "ssg-pay-webapp":"pay"
 	  , "ssg-mpay-webapp":"mpay"
 	  
+	  , "ssg-cso-webapp":"CSO"
 	  , "ssg-pco-webapp":"PCO"
 	  , "ssg-pdo-webapp":"PDO"	  
 	  , "ssg-ecms-webapp":"ECMS"	  
 	  , "pg-api-webapp":"PG_API"
 	  , "pg-www-webapp":"PG_프론트"	  
-	  , "pg-bo-webapp":"PG_BO"	  	  
+	  , "pg-bo-webapp":"PG_BO"
 	  
   }
   , getInfo : function() {
