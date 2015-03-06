@@ -34,8 +34,14 @@ window.addEventListener('load', function(evt) {
 			}
 		}
 	}
+
+	// 개발내역
+	var ds = ls.getItem("description");
+	if(ds != null) {
+		document.getElementById("description").value = ds;
+	}
 	
-	// 기획자
+	// 기획자요구사항
 	var pr = ls.getItem("pmRequest");
 	if(pr != null) {
 		document.getElementById("pmRequest").value = pr;
@@ -46,9 +52,6 @@ window.addEventListener('load', function(evt) {
 	if(ss != null) {
 		document.getElementById("sourceSrc").value = ss;
 	}
-	
-	//
-	
 });
 
 function onPageDetailsReceived()  { 
@@ -70,18 +73,20 @@ document.getElementById('confirmBtn').addEventListener('click', function(evt){
 function createDescription() {
 	chrome.runtime.getBackgroundPage(function(eventPage) {
 		var redmineNo = document.getElementById('redmine_no').value;
-		console.log(redmineNo);
+		
 		if(redmineNo == null || redmineNo == 'undefined' || redmineNo == ''){
 			alert("레드마인 번호를 입력해주세요.");
 			return;
 		}
 		
 		var releaseSystem = getReleaseSystem();
+		var description = getTextAreaForDescription("description");
 		var pmRequest = getTextArea("pmRequest");
 		var sourceSrc = getTextArea("sourceSrc");
 
 		eventPage.setDescription({
 		                    "redmineNo" : document.getElementById('redmine_no').value
+						   ,"description" : description
 		                   ,"releaseSystem" : releaseSystem
 						   ,"pmRequest" : pmRequest
 						   ,"sourceSrc" : sourceSrc
@@ -106,6 +111,22 @@ function getReleaseSystem() {
 		}
 	}
 	return releaseSystem;
+}
+
+function getTextAreaForDescription(targetId) {
+	var srcArr = document.getElementById(targetId).value.split("\n");
+	var sourceSrc = "";
+	console.log(srcArr);
+	if(srcArr.length >= 2 || (srcArr.length == 1 && srcArr[0] != '')) {
+		for(var i=0; i< srcArr.length; i++) {
+			var tempStr = "| " + srcArr[i] + " |\n"
+			if(i != 0) {
+				tempStr = "| " + tempStr; 
+			}
+			sourceSrc += tempStr;
+		};
+	}
+	return sourceSrc;
 }
 
 function getTextArea(targetId) {
@@ -139,6 +160,12 @@ window.addEventListener("unload", function (event) {
 		}
 		ls.setItem("releaseSystem", releaseSystem);
 	}
+
+	// 개발내역
+	var description = document.getElementById('description').value;
+	if(description != "") {
+		ls.setItem("description",description);
+	}
 	
 	// 기획자 요구사항
 	var pmRequest = document.getElementById('pmRequest').value;
@@ -159,6 +186,7 @@ document.getElementById('init').onclick = function(e){
     localStorage.setItem("staffNo", staffNo);
 
 	document.getElementById('redmine_no').value = "";
+	document.getElementById('description').value = "";
 	document.getElementById('pmRequest').value = "";
 	document.getElementById('sourceSrc').value = "";
 	

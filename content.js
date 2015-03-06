@@ -4,7 +4,7 @@
 	   ,subject : ""
 	   ,requester : ""
 	   ,developer : ""
-	   ,description : ""
+	   ,description : request.description
 	   ,startDate: ""
 	   ,dueDate: ""
 	   ,redmineNo: request.redmineNo
@@ -44,7 +44,10 @@
 			console.log("개발자 : "  + this.developer);
 	   }
 	   ,getDescription : function(d) {
-			this.description = this.getTarget(d, "class=\"wiki\">", "issue_tree", "<p>", "</p>"); 
+			if(this.description == "" || this.description == 'undefined' || this.description == null){
+				this.description = this.getTarget(d, "class=\"wiki\">", "issue_tree", "<p>", "</p>"); 
+				this.description = "| " + this.description + " |";
+			}
 			console.log("설명 : " + this.description);
 	   }
 	   ,getStartDate : function(d) {
@@ -99,9 +102,9 @@
 					  + "h2. 개발 SPEC (기능 추가 및 삭제/변경 내역)"
 					  + " \n\n"
 					  + "| Redmine key | #"+ this.redmineNo
-					  + " |\n| 내역 | " + this.description.replace(/<br \/>/gi, '\n')
+					  + " |\n| 내역 " + this.description.replace(/<br \/>/gi, '\n')
 					  
-					  + " |\n\n"
+					  + " \n\n"
 					  + "h2. 기획자 테스트 요구 사항"
 					  + " \n\n" + this.pmRequest
 					  

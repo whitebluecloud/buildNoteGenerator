@@ -4,6 +4,7 @@
             var tabId = tabs[0].id;
             chrome.tabs.sendMessage(tabId, {
                 redmineNo: d.redmineNo,
+				description: d.description,
                 releaseSystem: d.releaseSystem,
                 pmRequest: d.pmRequest,
                 sourceSrc: d.sourceSrc
