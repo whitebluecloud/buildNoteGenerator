@@ -53,9 +53,21 @@
 	   }
 	   ,getDueDate : function(d) {
 			this.dueDate = this.getTarget(d, "<th class=\"due-date", "담당자", "<td class=\"due-date\">", "</td>");
-			// 완료일자가 없는 경우 작성일자로 세팅
+			
 			if(this.dueDate == null || this.dueDate == "" || this.dueDate == "undefined") {
 				var today = new Date();
+				
+				var type = document.getElementById('issue_tracker_id');
+				// 정기배포유형이고 화요일이 지난 경우 차주 수요일로 세팅
+				if(type.value == '13') {
+					if(today.getDay() >= 3) {
+						today.setDate(today.getDate() + 10- today.getDay()); 
+					}else {
+						today.setDate(today.getDate() + 3- today.getDay()); 
+					}
+				}
+
+				// 완료일자가 없는 경우는 작성일로 세팅
 				this.dueDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
 			}
 			console.log("완료시간 : " + this.dueDate);
