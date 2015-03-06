@@ -1,7 +1,7 @@
 {
     "name": "build Note Generator",
     "description": "build Note Generator",
-    "version": "1.0.7",
+    "version": "1.1.0",
     "browser_action": {
         "name": "open popup",
         "default_icon": "cloud_16.png",
