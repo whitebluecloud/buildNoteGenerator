@@ -116,7 +116,7 @@ function getReleaseSystem() {
 function getTextAreaForDescription(targetId) {
 	var srcArr = document.getElementById(targetId).value.split("\n");
 	var sourceSrc = "";
-	console.log(srcArr);
+	
 	if(srcArr.length >= 2 || (srcArr.length == 1 && srcArr[0] != '')) {
 		for(var i=0; i< srcArr.length; i++) {
 			var tempStr = "| " + srcArr[i] + " |\n"

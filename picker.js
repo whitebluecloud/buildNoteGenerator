@@ -36,7 +36,7 @@
 	  , "ssg-traders-webapp":"트레이더스"
 	  , "ssg-boons-webapp":"분스"
 	  , "ssg-memall-webapp":"m이마트몰"
-	  , "ssg-mtraders-webapp":"m트레이더스"      
+	  , "ssg-mtraders-webapp":"m트레이더스"
 	  
 	  , "ssg-bo-webapp":"BO" 
 	  , "ssg-po-webapp":"PO" 
@@ -272,6 +272,20 @@
 			}
 		  });
 		});
+		
+		// 전몰 webapp 체크된 경우 FRONT PC ALL / MOBILE ALL 선택
+		if ($('#issue_custom_field_values_37 > option:selected').text().indexOf("SSGmSSG신세계몰신세계백화점m신세계몰mlguplus이마트몰트레이더스분스m이마트몰m트레이더스") != -1) {
+			$.each(that.releaseSystemOptions, function(i, v) {
+				v.selected = false;
+			});
+
+			$.each(that.releaseSystemOptions, function(i, v) {
+				if(v.value == "프론트PC ALL" || v.value == "프론트Mobile ALL" ) {
+				  v.selected = true;
+				}
+			});
+			console.log("FRONT 전몰 선택 확인되어 기존 선택된 시스템 해제 후 프론트PC ALL & 프론트MOBILE ALL 선택");
+		}
     }
 	, selectStaffNo: function () {
         if (this.staffNo) {
